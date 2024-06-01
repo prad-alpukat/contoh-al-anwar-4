@@ -1,4 +1,19 @@
+import { useNavigate } from "react-router-dom";
+
 export default function NavbarAdmin() {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    const konfirmasi = confirm("Apakah kamu yakin untuk logout?");
+    if (konfirmasi) {
+      //   remove token
+      localStorage.removeItem("token");
+
+      // redirect ke halaman login
+      navigate("/admin/login");
+    }
+  }
+
   return (
     <nav className="navbar navbar-expand-lg bg-primary navbar-dark">
       <div className="container">
@@ -19,9 +34,9 @@ export default function NavbarAdmin() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <a className="btn btn-danger btn-sm" aria-current="page" href="#">
+              <button onClick={handleLogout} className="btn btn-danger btn-sm">
                 Logout
-              </a>
+              </button>
             </li>
           </ul>
         </div>
