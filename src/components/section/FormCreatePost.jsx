@@ -1,4 +1,9 @@
+import { useState } from "react";
+
 export default function FormCreatePost() {
+  const [judul, setJudul] = useState("");
+  const [konten, setKonten] = useState("");
+
   return (
     <section className="container">
       <div className="row justify-content-center">
@@ -21,6 +26,8 @@ export default function FormCreatePost() {
                     Judul
                   </label>
                   <input
+                    value={judul}
+                    onInput={(event) => setJudul(event.target.value)}
                     type="text"
                     className="form-control"
                     id="judul"
@@ -34,6 +41,8 @@ export default function FormCreatePost() {
                     Konten
                   </label>
                   <textarea
+                    value={konten}
+                    onInput={(event) => setKonten(event.target.value)}
                     className="form-control"
                     id="konten"
                     rows={3}

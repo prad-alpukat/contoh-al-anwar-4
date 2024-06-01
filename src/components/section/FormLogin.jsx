@@ -1,20 +1,31 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useState } from "react-router-dom";
 
 export default function FormLogin() {
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
 
     //  fetch api login
-    //   ...
-
-    //   behasil login
-    alert("berhasil login");
-
-    // set token ke localstorage
-    localStorage.setItem("token", "alkdsjfklajsdkf");
-    navigate("/admin");
+    fetch("https://web.abdulhaxor.my.id/wp-json/jwt-auth/v1/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: new URLSearchParams({
+        username: username,
+        password: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert("berhasil login");
+        console.log(data);
+        localStorage.setItem("token", data.token);
+        navigate("/admin");
+      });
   }
   return (
     <section className="container">
@@ -34,6 +45,8 @@ export default function FormLogin() {
                     className="form-control"
                     id="username"
                     placeholder="username..."
+                    value={username}
+                    onChange={(event) => setUsername(event.target.value)}
                   />
                 </div>
                 {/* password */}
@@ -46,6 +59,8 @@ export default function FormLogin() {
                     className="form-control"
                     id="password"
                     placeholder="password..."
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
                   />
                 </div>
                 <button onClick={handleSubmit} className="btn btn-primary">
