@@ -7,6 +7,7 @@ export default function NavbarAdmin() {
     const konfirmasi = confirm("Apakah kamu yakin untuk logout?");
     if (konfirmasi) {
       //   remove token
+      // testing
       localStorage.removeItem("token");
 
       // redirect ke halaman login
