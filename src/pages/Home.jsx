@@ -1,3 +1,5 @@
+import SectionProgram from "../components/section/SectionProgram";
+
 export default function Home() {
-  return <div>Home</div>;
+  return <SectionProgram />;
 }
